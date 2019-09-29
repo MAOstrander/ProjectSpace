@@ -1,7 +1,6 @@
-﻿using GroundControl.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using GroundControl.DataLayer;
+using GroundControl.Models;
+using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,35 +8,15 @@ namespace GroundControl.Services
 {
     public class LaunchpadService : ILaunchpadService
     {
-        private readonly IHttpClientFactory _clientFactory;
-        public LaunchpadModel Launchpad { get; private set; }
-        public bool LaunchpadRetrievalError { get; private set; }
-        public LaunchpadService(IHttpClientFactory httpClientFactory)
+        private readonly ILaunchpadDAO dao;
+        public LaunchpadService(ILaunchpadDAO launchpadDAO)
         {
-            _clientFactory = httpClientFactory;
+            dao = launchpadDAO;
         }
         public async Task<LaunchpadModel> getLaunchPadById(string id)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spacexdata.com/v3/launchpads/{id}");
-            request.Headers.Add("Accept", "application/vnd.github.v3+json");
-
-            var client = _clientFactory.CreateClient();
-
-            var response = await client.SendAsync(request);
-
-            if (response.IsSuccessStatusCode)
-            {
-                Launchpad = await response.Content
-                    .ReadAsAsync<LaunchpadModel>();
-            }
-            else
-            {
-                LaunchpadRetrievalError = true;
-                Launchpad = new LaunchpadModel(id, "name", "status");
-            }
-
-
-            return Launchpad;
+            var response = await dao.getLaunchPadById(id);
+            return response;
         }
     }
 
