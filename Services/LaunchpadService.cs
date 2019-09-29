@@ -1,7 +1,5 @@
 ﻿using GroundControl.DataLayer;
 using GroundControl.Models;
-using Microsoft.Extensions.Configuration;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GroundControl.Services
