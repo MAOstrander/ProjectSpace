@@ -41,7 +41,6 @@ namespace GroundControl
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
