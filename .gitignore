@@ -3,6 +3,8 @@
 project.lock.json
 .DS_Store
 *.pyc
+*.log
+logs/
 
 # User-specific files
 *.suo

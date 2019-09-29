@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GroundControl.Models;
 using GroundControl.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace GroundControl.Controllers
 {
@@ -13,16 +14,18 @@ namespace GroundControl.Controllers
     public class LaunchpadController : ControllerBase
     {
         private ILaunchpadService _launchpadService;
-        public LaunchpadController(ILaunchpadService launchpadService)
+        private ILogger<LaunchpadController> _logger;
+        public LaunchpadController(ILaunchpadService launchpadService, ILogger<LaunchpadController> logger)
         {
             _launchpadService = launchpadService;
+            _logger = logger;
         }
 
         // GET Health Check to make sure app is running
         [HttpGet]
         public ActionResult<string> Get()
         {
-
+            _logger.LogDebug("System is logging as expected");
             return Ok("System Operational");
         }
 
