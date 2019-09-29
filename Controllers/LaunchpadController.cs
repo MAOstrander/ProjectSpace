@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GroundControl.Models;
+using GroundControl.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GroundControl.Controllers
@@ -11,6 +12,12 @@ namespace GroundControl.Controllers
     [ApiController]
     public class LaunchpadController : ControllerBase
     {
+        private ILaunchpadService _launchpadService;
+        public LaunchpadController(ILaunchpadService launchpadService)
+        {
+            _launchpadService = launchpadService;
+        }
+
         // GET Health Check to make sure app is running
         [HttpGet]
         public ActionResult<string> Get()
@@ -21,12 +28,22 @@ namespace GroundControl.Controllers
 
         // GET Launchpad info retrieved by Id
         [HttpGet("{id}")]
-        public ActionResult<LaunchpadModel> Get(string id)
+        public async Task<ActionResult<LaunchpadModel>> Get(string id)
         {
+            // I want to use a logging service so that the logging can eventually be swapped out for cloudbased logging
+            // loggingService.log("");
             // call a service with the given ID. This service will return a LaunchpadModel after checking either the api or a future database.
+            try
+            {
+                LaunchpadModel response = await _launchpadService.getLaunchPadById(id);
+                return Ok(response);
 
-            LaunchpadModel response = new LaunchpadModel(id, "test", "nominal");
-            return response;
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
         }
 
     }
