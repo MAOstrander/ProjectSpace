@@ -14,5 +14,10 @@
             Launchpad info retrieved by Id
             </summary>
         </member>
+        <member name="M:GroundControl.Controllers.LaunchpadController.GetAll(System.String,System.String)">
+            <summary>
+            Launchpad set returned by criteria
+            </summary>
+        </member>
     </members>
 </doc>

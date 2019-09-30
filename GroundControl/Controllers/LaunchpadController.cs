@@ -3,6 +3,7 @@ using GroundControl.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GroundControl.Controllers
@@ -43,6 +44,31 @@ namespace GroundControl.Controllers
             try
             {
                 LaunchpadModel response = await _launchpadService.getLaunchPadById(id);
+                _logger.LogDebug("Launchpad Get returned from service with response of: {Response}", response);
+                return Ok(response);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Launchpad Get encountered an exception: {Ex}", ex);
+                return NotFound();
+            }
+
+        }
+
+
+        /// <summary>
+        /// Launchpad set returned by criteria
+        /// </summary>
+        [HttpGet("all")]
+        public async Task<ActionResult<List<LaunchpadModel>>> GetAll(string status, string namesearch)
+        {
+            _logger.LogDebug("Status of launchpads requested was: {Status}", status);
+            _logger.LogDebug("Requested name/location contains part of the following phrase: {Namesearch}", namesearch);
+
+            try
+            {
+                var response = await _launchpadService.getAllLaunchpads(status, namesearch);
                 _logger.LogDebug("Launchpad Get returned from service with response of: {Response}", response);
                 return Ok(response);
 

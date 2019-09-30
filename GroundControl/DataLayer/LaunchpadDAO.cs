@@ -1,6 +1,8 @@
 ﻿using GroundControl.Models;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace GroundControl.DataLayer
 {
@@ -21,6 +23,31 @@ namespace GroundControl.DataLayer
 
             var response = new LaunchpadModel(dataObject.Id, dataObject.Full_name, dataObject.Status);
             return response;
+        }
+
+        public async Task<IEnumerable<LaunchpadModel>> getAllLaunchpads(string status, string location)
+        {
+            var dataObject = await _launchpadRepo.Get();
+
+            if (!string.IsNullOrWhiteSpace(status))
+            {
+                dataObject = dataObject.Where(x => x.Status == status);
+            }
+
+            if (!string.IsNullOrWhiteSpace(location))
+            {
+                dataObject = dataObject.Where(x => x.Full_name.Contains(location));
+            }
+            var responseObject = new List<LaunchpadModel>();
+            foreach (var modelToChange in dataObject)
+            {
+                var modelItem = new LaunchpadModel(modelToChange.Id, modelToChange.Full_name, modelToChange.Status);
+                _logger.LogInformation("LaunchpadDAO getAllLaunchpads creating new LaunchpadModel with {Id} {Full_Name} {Status}", modelToChange.Id, modelToChange.Full_name, modelToChange.Status);
+                responseObject.Add(modelItem);
+            }
+
+
+            return responseObject;
         }
     }
 }
