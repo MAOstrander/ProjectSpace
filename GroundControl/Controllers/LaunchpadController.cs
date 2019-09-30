@@ -19,7 +19,9 @@ namespace GroundControl.Controllers
             _logger = logger;
         }
 
-        // GET Health Check to make sure app is running
+        /// <summary>
+        /// Health Check to make sure app is running
+        /// </summary>
         [HttpGet]
         public ActionResult<string> Get()
         {
@@ -27,7 +29,12 @@ namespace GroundControl.Controllers
             return Ok("System Operational");
         }
 
-        // GET Launchpad info retrieved by Id
+        /// <summary>
+        /// Launchpad info retrieved by Id
+        /// </summary>
+        /// <param name="id">
+        /// The string that identifies the launchpad to be returned
+        /// </param>
         [HttpGet("{id}")]
         public async Task<ActionResult<LaunchpadModel>> Get(string id)
         {

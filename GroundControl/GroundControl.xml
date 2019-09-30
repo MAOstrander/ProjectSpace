@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GroundControl</name>
+    </assembly>
+    <members>
+        <member name="M:GroundControl.Controllers.LaunchpadController.Get">
+            <summary>
+            Health Check to make sure app is running
+            </summary>
+        </member>
+        <member name="M:GroundControl.Controllers.LaunchpadController.Get(System.String)">
+            <summary>
+            Launchpad info retrieved by Id
+            </summary>
+            <param name="id">
+            The string that identifies the launchpad to be returned
+            </param>
+        </member>
+    </members>
+</doc>
