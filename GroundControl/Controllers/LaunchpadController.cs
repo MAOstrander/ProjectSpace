@@ -32,9 +32,6 @@ namespace GroundControl.Controllers
         /// <summary>
         /// Launchpad info retrieved by Id
         /// </summary>
-        /// <param name="id">
-        /// The string that identifies the launchpad to be returned
-        /// </param>
         [HttpGet("{id}")]
         public async Task<ActionResult<LaunchpadModel>> Get(string id)
         {

@@ -13,9 +13,6 @@
             <summary>
             Launchpad info retrieved by Id
             </summary>
-            <param name="id">
-            The string that identifies the launchpad to be returned
-            </param>
         </member>
     </members>
 </doc>
