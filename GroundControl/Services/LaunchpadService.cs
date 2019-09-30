@@ -13,8 +13,7 @@ namespace GroundControl.Services
         }
         public async Task<LaunchpadModel> getLaunchPadById(string id)
         {
-            var response = await dao.getLaunchPadById(id);
-            return response;
+            return await dao.getLaunchPadById(id);
         }
     }
 
