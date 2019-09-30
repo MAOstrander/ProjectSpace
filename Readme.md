@@ -1,4 +1,4 @@
-#GroundControl
+# GroundControl
 
 This project was built to lay the groundwork architecture for a project in which information about various launchpads provided by the [SpaceX API](https://github.com/r-spacex/SpaceX-API/blob/master/docs/launchpad.md) are provided, filtered, and returned.
 It's built in a way that allows just a manageable portion of the information retured from the API to be passed on to the caller. It also was built with the intention of allowing portions of the code based to be modified, extended, or replaced with limited disruption. (Say if a different API were used, data repository set up, or models changed.)
@@ -15,7 +15,7 @@ It's built in a way that allows just a manageable portion of the information ret
 
 ## How to setup
 - Download or clone this repo
-- You can use Visual Studio to open the sln file, and press IISExpress with the Api as your startup project. This should take you to: http://localhost:63953/swagger.
+- You can use Visual Studio to open the sln file, and press IISExpress with the Api as your startup project. This should take you to: http://localhost:63953/swagger
 
 
 ## Future Plans
